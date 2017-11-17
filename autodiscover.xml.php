@@ -68,12 +68,12 @@ function determineTemplateFile () {
   
   switch($template) {
 
-    case "config-v1.1.xml":
-      $file = 'mail/config-v1.1.xml';
+    case "config-v1.1.xml.php":
+      $file = 'tpl/config-v1.1.xml.php';
       break;
 
     default:
-      $file = 'mail/autodiscover.xml';
+      $file = 'tpl/autodiscover.xml.php';
       break;
 
   }

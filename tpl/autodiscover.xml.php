@@ -30,7 +30,7 @@ nntp: The values under this Account tag indicate configuration settings for a NN
 This value indicates if the goal of this account results is to provide the settings or redirect to another web server that can provide results.
 VALUES:
 redirectUrl: If this value is specified, then the URL tag will specify the http: or https: URL containing the Autodiscover results to be used.  In order to prevent the server from being able to send the client into an infinite loop, the client should stop redirecting after 10 redirects.
-redirectAddr: If this value is specified, then the XML tag will specify the e-mail address that Outlook should use to execute Autodiscover again.  In other words, the server is telling the client that the e-mail address the client should really be using for Autodiscover is not the one that was posted, but the one specified in this tag. 
+redirectAddr: If this value is specified, then the XML tag will specify the e-tpl address that Outlook should use to execute Autodiscover again.  In other words, the server is telling the client that the e-tpl address the client should really be using for Autodiscover is not the one that was posted, but the one specified in this tag.
 settings: If this value is specified, then the XML will contain the settings needed to configure the account.  The settings will primarily be under the PROTOCOL tag.
 -->
 <Action>settings</Action>
@@ -63,7 +63,7 @@ The tag encloses the specifications for a single account type.  The list of Prot
 -->
 <Protocol>
 <!-- TYPE: Required.
-The value here specifies what kind of mail account is being configured.
+The value here specifies what kind of tpl account is being configured.
 POP3: The protocol to connect to this server is POP3. Only applicable for AccountType=email.
 SMTP: The protocol to connect to this server is SMTP. Only applicable for AccountType=email.
 IMAP: The protocol to connect to this server is IMAP. Only applicable for AccountType=email.
@@ -85,14 +85,14 @@ The value here specifies the time to live in hours that these settings are valid
 <TTL>%TTL%</TTL>
 
 <!-- Server: Required.
-The value here specifies the name of the mail server corresponding to the server type specified above.
+The value here specifies the name of the tpl server corresponding to the server type specified above.
 For protocols such as POP3, SMTP, IMAP, or NNTP, this value will be either a hostname or an IP address.
 For protocols such as DAV or WEB, this will be an URL.
 -->
 <Server>%SERVER/IMAP/HOST%</Server> <!--IP Addr or DNS name of server-->
 
 <!-- Port: Optional.
-The value specifies the Port number to use.  If no value is specified, the default settings will be used depending on the mail server type.  This value is not used if the SERVER tag contains an URL.
+The value specifies the Port number to use.  If no value is specified, the default settings will be used depending on the tpl server type.  This value is not used if the SERVER tag contains an URL.
 -->
 <Port>%SERVER/IMAP/PORT%</Port>
 
@@ -108,7 +108,7 @@ If this value is true, then a domain is required during authentication.  If the 
 <DomainRequired>%SERVER/IMAP/DOMAIN_REQUIRED%</DomainRequired>
 
 <!-- DomainName: Optional.
-This value specifies the user's domain. If no value is specified, the default authentication will be to use the e-mail address as a UPN format <Username>@<Domain>. Such as JoeUser@SalesDomain.
+This value specifies the user's domain. If no value is specified, the default authentication will be to use the e-tpl address as a UPN format <Username>@<Domain>. Such as JoeUser@SalesDomain.
 --><!--
 <DomainName></DomainName>
 -->

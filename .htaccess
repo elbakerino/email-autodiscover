@@ -11,6 +11,6 @@ RewriteRule ^mail/(.*)$ %{ENV:BASE}autodiscover.xml.php?template=config-v1.1.xml
 #RewriteCond %{REQUEST_FILENAME} -f
 RewriteRule ^mail/(.*)$ %{ENV:BASE}autodiscover.xml.php?template=config-v1.1.xml&email=$1 [L]
 
-#RewriteRule ^(.*)/?mail/(.*)$ info.php [L]
+#RewriteRule ^(.*)/?tpl/(.*)$ info.php [L]
 RewriteRule ^(.*)/?autodiscover\.xml$ autodiscover.xml.php [L,NC]
-#RewriteRule ^(.*)/?autodiscover\.json$ autodiscover.xml.php [L,NC]
+#RewriteRule ^(.*)/?autodiscover\.json$ autodiscover.xml.php.php [L,NC]
