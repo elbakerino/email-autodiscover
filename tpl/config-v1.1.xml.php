@@ -1,27 +1,32 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?php
+echo '<?xml version = "1.0" encoding = "utf-8"?>';
+/**
+ * @var \Autodiscover\Setting $setting
+ */
+?>
 
 <clientConfig version="1.1">
-  <emailProvider id="%INFO/DOMAIN%">
-    <domain>%INFO/DOMAIN%</domain>
-    <displayName>%INFO/NAME%</displayName>
-    <displayShortName>%INFO/NAME%</displayShortName>
-    <incomingServer type="imap">
-      <hostname>%SERVER/IMAP/HOST%</hostname>
-      <port>%SERVER/IMAP/PORT%</port>
-      <socketType>%SERVER/IMAP/SOCKET%</socketType>
-      <authentication>password-cleartext</authentication>
-      <username>%EMAIL%</username>
-    </incomingServer>
-    <outgoingServer type="smtp">
-      <hostname>%SERVER/SMTP/HOST%</hostname>
-      <port>%SERVER/SMTP/PORT%</port>
-      <socketType>%SERVER/SMTP/SOCKET%</socketType>
-      <authentication>password-cleartext</authentication>
-      <username>%EMAIL%</username>
-    </outgoingServer>
-    <documentation url="%INFO/URL%">
-      <descr lang="de">Allgemeine Beschreibung der Einstellungen</descr>
-      <descr lang="en">Generic settings page</descr>
-    </documentation>
-  </emailProvider>
+    <emailProvider id="<?= $setting->getInfoDomain() ?>">
+        <domain><?= $setting->getInfoDomain() ?></domain>
+        <displayName><?= $setting->getInfoName() ?></displayName>
+        <displayShortName><?= $setting->getInfoName() ?></displayShortName>
+        <incomingServer type="imap">
+            <hostname><?= $setting->getImapHost() ?></hostname>
+            <port><?= $setting->getImapPort() ?></port>
+            <socketType><?= $setting->getImapSocket() ?></socketType>
+            <authentication>password-cleartext</authentication>
+            <username><?= getEmail() ?></username>
+        </incomingServer>
+        <outgoingServer type="smtp">
+            <hostname><?= $setting->getSmtpHost() ?></hostname>
+            <port><?= $setting->getSmtpPort() ?></port>
+            <socketType><?= $setting->getSmtpSocket() ?></socketType>
+            <authentication>password-cleartext</authentication>
+            <username><?= getEmail() ?></username>
+        </outgoingServer>
+        <documentation url="<?= $setting->getInfoUrl() ?>">
+            <descr lang="de">Allgemeine Beschreibung der Einstellungen</descr>
+            <descr lang="en">Generic settings page</descr>
+        </documentation>
+    </emailProvider>
 </clientConfig>
