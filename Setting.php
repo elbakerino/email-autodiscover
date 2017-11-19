@@ -180,6 +180,11 @@ class Setting {
         return $this->get(['server', 'smtp', 'socket'], $scope, $mailbox_id);
     }
 
+    public function getActiveSynchUrl($scope = 'general', $mailbox_id = null) {
+
+        return $this->get(['server', 'activesync', 'url'], $scope, $mailbox_id);
+    }
+
     public function getDomainRequired($scope = 'general', $mailbox_id = null) {
 
         return $this->get(['domain_required'], $scope, $mailbox_id);
