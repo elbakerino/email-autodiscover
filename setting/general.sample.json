@@ -16,6 +16,7 @@
       "socket": "SSL"
     }
   },
-  "domain_required": true
+  "domain_required": true,
+  "login_name_require": true,
   "ttl": 168
 }

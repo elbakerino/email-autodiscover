@@ -190,6 +190,11 @@ class Setting {
         return $this->get(['domain_required'], $scope, $mailbox_id);
     }
 
+    public function getLoginNameRequire($scope = 'general', $mailbox_id = null) {
+
+        return $this->get(['login_name_require'], $scope, $mailbox_id);
+    }
+
     public function getTtl($scope = 'general', $mailbox_id = null) {
 
         return $this->get(['ttl'], $scope, $mailbox_id);

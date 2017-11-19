@@ -154,9 +154,9 @@ echo '<?xml version = "1.0" encoding = "utf-8"?>';
                  * LoginName: Optional.
                  * This value specifies the user's login.  If no value is specified, the default will be set to the string preceding the '@' in the email address.  If the Login name contains a domain, the format should be <Username>@<Domain>.  Such as JoeUser@SalesDomain.
                  */
-                //strrev(substr(strrev(getEmail()), strpos(strrev(getEmail()), '.')+1))
-
-                if(null !== getUserEmail()) {
+                // todo: add config to control building of loginname (only name[before @], email adress, \domain\user etc)
+                // strrev(substr(strrev(getEmail()), strpos(strrev(getEmail()), '.')+1))
+                if($setting->getLoginNameRequire('user', getUserEmail()) && null !== getUserEmail()) {
                     echo '<LoginName>' . getUserEmail() . '</LoginName>';
                 }
                 ?>
