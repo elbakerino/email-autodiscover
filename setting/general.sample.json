@@ -14,8 +14,8 @@
       "host": "{{$SMTP_HOST}}",
       "port": {{$SMTP_PORT}},
       "socket": "SSL"
-    },
-    "domain_required": true
+    }
   },
+  "domain_required": true
   "ttl": 168
 }

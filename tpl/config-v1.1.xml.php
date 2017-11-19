@@ -6,25 +6,25 @@ echo '<?xml version = "1.0" encoding = "utf-8"?>';
 ?>
 
 <clientConfig version="1.1">
-    <emailProvider id="<?= $setting->getInfoDomain() ?>">
-        <domain><?= $setting->getInfoDomain() ?></domain>
-        <displayName><?= $setting->getInfoName() ?></displayName>
-        <displayShortName><?= $setting->getInfoName() ?></displayShortName>
+    <emailProvider id="<?= $setting->getInfoDomain('user', getUserEmail()) ?>">
+        <domain><?= $setting->getInfoDomain('user', getUserEmail()) ?></domain>
+        <displayName><?= $setting->getInfoName('user', getUserEmail()) ?></displayName>
+        <displayShortName><?= $setting->getInfoName('user', getUserEmail()) ?></displayShortName>
         <incomingServer type="imap">
-            <hostname><?= $setting->getImapHost() ?></hostname>
-            <port><?= $setting->getImapPort() ?></port>
-            <socketType><?= $setting->getImapSocket() ?></socketType>
+            <hostname><?= $setting->getImapHost('user', getUserEmail()) ?></hostname>
+            <port><?= $setting->getImapPort('user', getUserEmail()) ?></port>
+            <socketType><?= $setting->getImapSocket('user', getUserEmail()) ?></socketType>
             <authentication>password-cleartext</authentication>
-            <username><?= getEmail() ?></username>
+            <username><?= getUserEmail() ?></username>
         </incomingServer>
         <outgoingServer type="smtp">
-            <hostname><?= $setting->getSmtpHost() ?></hostname>
-            <port><?= $setting->getSmtpPort() ?></port>
-            <socketType><?= $setting->getSmtpSocket() ?></socketType>
+            <hostname><?= $setting->getSmtpHost('user', getUserEmail()) ?></hostname>
+            <port><?= $setting->getSmtpPort('user', getUserEmail()) ?></port>
+            <socketType><?= $setting->getSmtpSocket('user', getUserEmail()) ?></socketType>
             <authentication>password-cleartext</authentication>
-            <username><?= getEmail() ?></username>
+            <username><?= getUserEmail() ?></username>
         </outgoingServer>
-        <documentation url="<?= $setting->getInfoUrl() ?>">
+        <documentation url="<?= $setting->getInfoUrl('user', getUserEmail()) ?>">
             <descr lang="de">Allgemeine Beschreibung der Einstellungen</descr>
             <descr lang="en">Generic settings page</descr>
         </documentation>

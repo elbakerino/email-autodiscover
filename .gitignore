@@ -1,4 +1,6 @@
-setting.json
+setting/*
+!setting/general.sample.json
+!setting/mailbox.sample.json
 *.swp
 .DS_Store
 .idea
