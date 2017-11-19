@@ -1,15 +1,23 @@
-Options -Indexes
-RewriteEngine On
-RewriteBase /
+<IfModule mod_rewrite.c>
+    Options -Indexes
+    Options +FollowSymlinks
 
-RewriteCond %{REQUEST_URI}::$1 ^(.*?/)(.*)::\2$
-RewriteRule ^(.*)$ - [E=BASE:%1]
+    RewriteEngine On
+    RewriteBase /
 
-RewriteCond %{QUERY_STRING} ^(emailaddress)=(.*)$
-RewriteRule ^mail/(.*)$ %{ENV:BASE}autodiscover.xml.php?template=config-v1.1.xml&email=%2 [L]
+    RewriteCond %{HTTPS} off
+    RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 
-#RewriteCond %{REQUEST_FILENAME} -f
-RewriteRule ^mail/(.*)$ %{ENV:BASE}autodiscover.xml.php?template=config-v1.1.xml&email=$1 [L]
+    RewriteCond %{REQUEST_URI}::$1 ^(.*?/)(.*)::\2$
+    RewriteRule ^(.*)$ - [E=BASE:%1]
 
-#RewriteRule ^(.*)/?mail/(.*)$ info.php [L]
-RewriteRule ^(.*)/?autodiscover\.xml$ autodiscover.xml.php [L]
+    RewriteCond %{QUERY_STRING} ^(emailaddress)=(.*)$
+    RewriteRule ^mail/(.*)$ %{ENV:BASE}autodiscover.php?mail_client=thunderbird&email=%2 [L,NC,QSA]
+
+    #RewriteCond %{REQUEST_FILENAME} -f
+    RewriteRule ^mail/(.*)$ %{ENV:BASE}autodiscover.php?mail_client=thunderbird&email=$1 [L,NC,QSA]
+
+    RewriteRule ^(.*)/?autodiscover\.xml$ autodiscover.php?mail_client=outlook_xml [L,NC,QSA]
+    RewriteRule ^(.*)/?autodiscover\.json$ autodiscover.php?mail_client=outlook_json [L,NC,QSA]
+
+</IfModule>

@@ -1,0 +1,17 @@
+{
+  "server": {
+    "domain.tld": {
+      // everything like general.sample.json
+    },
+    "example.org": {
+      "info": {
+        "name": "other name"
+      }
+    }
+  },
+  "user": {
+    "user@domain.tld": {
+      // everything like general.sample.json
+    }
+  }
+}
