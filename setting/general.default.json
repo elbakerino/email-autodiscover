@@ -1,0 +1,22 @@
+{
+  "info": {
+    "name": "",
+    "url": "https://domain.tld",
+    "domain": "domain.tld"
+  },
+  "server": {
+    "imap": {
+      "host": "mail.domain.tld",
+      "port": 993,
+      "socket": "SSL"
+    },
+    "smtp": {
+      "host": "mail.domain.tld",
+      "port": 465,
+      "socket": "SSL"
+    }
+  },
+  "domain_required": true,
+  "login_name_required": true,
+  "ttl": 1
+}

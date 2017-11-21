@@ -1,0 +1,97 @@
+////
+/// Grid: Breakpoint.Mixin
+/// ================
+/// All the grid breakpoint things.
+/// @group Grid:Breakpoint
+/// @author Michael Becker
+////
+
+/// Breakpoint mixin for sm-eXtra
+/// got no -up or -down version, as -up would be all and -down would be like normal smx, as it is the smallest size
+/// @content will only be displayed when screen smaller or same then $for-bp-smx-max-size
+@mixin for-bp-smx {
+    @media (max-width: $for-bp-smx-max-size) {
+        @content;
+    }
+}
+
+/// Breakpoint mixin for sm and bigger
+/// @content will only be displayed when screen bigger then $for-bp-sm-min-size
+@mixin for-bp-sm-up {
+    @media (min-width: $for-bp-sm-min-size) {
+        @content;
+    }
+}
+
+/// Breakpoint mixin for only sm
+/// @content will only be displayed when screen bigger then $for-bp-sm-min-size and smaller then $for-bp-md-min-size
+@mixin for-bp-sm {
+    @media (min-width: $for-bp-sm-min-size) and (max-width: $for-bp-md-min-size - 1) {
+        @content;
+    }
+}
+
+/// Breakpoint mixin for sm and smaller
+/// @content will only be displayed when screen smaller then $for-bp-md-min-size
+@mixin for-bp-sm-down {
+    @media (max-width: $for-bp-md-min-size - 1) {
+        @content;
+    }
+}
+
+/// Breakpoint mixin for md and bigger
+/// @content will only be displayed when screen bigger then $for-bp-sm-min-size
+@mixin for-bp-md-up {
+    @media (min-width: $for-bp-md-min-size) {
+        @content;
+    }
+}
+
+/// Breakpoint mixin for only md
+/// @content will only be displayed when screen bigger then $for-bp-sm-min-size and smaller then $for-bp-md-min-size
+@mixin for-bp-md {
+    @media (min-width: $for-bp-md-min-size) and (max-width: $for-bp-lg-min-size - 1) {
+        @content;
+    }
+}
+
+/// Breakpoint mixin for md and smaller
+/// @content will only be displayed when screen smaller then $for-bp-md-min-size
+@mixin for-bp-md-down {
+    @media (max-width: $for-bp-lg-min-size - 1) {
+        @content;
+    }
+}
+
+/// Breakpoint mixin for lg and bigger
+/// @content will only be displayed when screen bigger then $for-bp-lg-min-size
+@mixin for-bp-lg-up {
+    @media (min-width: $for-bp-lg-min-size) {
+        @content;
+    }
+}
+
+/// Breakpoint mixin for only lg
+/// @content will only be displayed when screen bigger then $for-bp-lg-min-size and smaller then $for-bp-lgx-min-size
+@mixin for-bp-lg {
+    @media (min-width: $for-bp-lg-min-size) and (max-width: $for-bp-lgx-min-size - 1) {
+        @content;
+    }
+}
+
+/// Breakpoint mixin for lg and smaller
+/// @content will only be displayed when screen smaller then $for-bp-lgx-min-size
+@mixin for-bp-lg-down {
+    @media (max-width: $for-bp-lgx-min-size - 1) {
+        @content;
+    }
+}
+
+/// Breakpoint mixin for lg-eXtra
+/// This screen size got no -up or -down version, as -down would be all and -up would be like normal lgx, as it is the highest size
+/// @content will only be displayed when screen bigger then $for-bp-lgx-min-size
+@mixin for-bp-lgx {
+    @media (min-width: $for-bp-lgx-min-size) {
+        @content;
+    }
+}

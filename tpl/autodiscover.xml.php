@@ -1,7 +1,7 @@
 <?php
 echo '<?xml version = "1.0" encoding = "utf-8"?>';
 /**
- * @var \Autodiscover\Setting $setting
+ * @var \Bemit\Autodiscover\Setting $setting
  */
 ?>
 <Autodiscover xmlns="http://schemas.microsoft.com/exchange/autodiscover/responseschema/2006">
@@ -25,7 +25,7 @@ echo '<?xml version = "1.0" encoding = "utf-8"?>';
              * The server may have a good formal display name.  The client can decide to accept it or change it.  This will save the user time in the default case.
              */
             ?>
-            <DisplayName><?= $setting->getInfoName('user', getUserEmail()) ?></DisplayName>
+            <DisplayName><?= $setting->getInfoName('user', $setting->getUser()->getEmail()) ?></DisplayName>
         </User>
 
         <?php
@@ -91,7 +91,7 @@ echo '<?xml version = "1.0" encoding = "utf-8"?>';
              * This is a link to the ISP’s Home Page. The client can choose whether or not they expose this link to the user. (not used by Outlook 2007)
              */
             ?>
-            <ServiceHome><?= $setting->getInfoUrl('user', getUserEmail()) ?></ServiceHome>
+            <ServiceHome><?= $setting->getInfoUrl('user', $setting->getUser()->getEmail()) ?></ServiceHome>
 
             <?php
             /*
@@ -129,7 +129,7 @@ echo '<?xml version = "1.0" encoding = "utf-8"?>';
                  * The value here specifies the time to live in hours that these settings are valid for. After that time has elapsed (from the time the settings were retrieved), the settings should be rediscovered via Autodiscovery again. A value of 0 indicates that no rediscovery will be required. If no value is specified, the default will be a TTL of 1 hour.
                  */
                 ?>
-                <TTL><?= $setting->getTtl('user', getUserEmail()) ?></TTL>
+                <TTL><?= $setting->getTtl('user', $setting->getUser()->getEmail()) ?></TTL>
 
                 <?php
                 /*
@@ -139,7 +139,7 @@ echo '<?xml version = "1.0" encoding = "utf-8"?>';
                  * For protocols such as DAV or WEB, this will be an URL.
                  */
                 ?>
-                <Server><?= $setting->getImapHost('user', getUserEmail()) ?></Server>
+                <Server><?= $setting->getImapHost('user', $setting->getUser()->getEmail()) ?></Server>
 
                 <?php
                 /*
@@ -147,7 +147,7 @@ echo '<?xml version = "1.0" encoding = "utf-8"?>';
                  * The value specifies the Port number to use.  If no value is specified, the default settings will be used depending on the tpl server type.  This value is not used if the SERVER tag contains an URL.
                  */
                 ?>
-                <Port><?= $setting->getImapPort('user', getUserEmail()) ?></Port>
+                <Port><?= $setting->getImapPort('user', $setting->getUser()->getEmail()) ?></Port>
 
                 <?php
                 /*
@@ -156,8 +156,8 @@ echo '<?xml version = "1.0" encoding = "utf-8"?>';
                  */
                 // todo: add config to control building of loginname (only name[before @], email adress, \domain\user etc)
                 // strrev(substr(strrev(getEmail()), strpos(strrev(getEmail()), '.')+1))
-                if($setting->getLoginNameRequire('user', getUserEmail()) && null !== getUserEmail()) {
-                    echo '<LoginName>' . getUserEmail() . '</LoginName>';
+                if($setting->getLoginNameRequired('user', $setting->getUser()->getEmail()) && null !== $setting->getUser()->getEmail()) {
+                    echo '<LoginName>' . $setting->getUser()->getEmail() . '</LoginName>';
                 }
                 ?>
 
@@ -168,15 +168,15 @@ echo '<?xml version = "1.0" encoding = "utf-8"?>';
                  */
 
                 ?>
-                <DomainRequired><?= isOnOrOff($setting->getDomainRequired('user', getUserEmail())) ?></DomainRequired>
+                <DomainRequired><?= isOnOrOff($setting->getDomainRequired('user', $setting->getUser()->getEmail())) ?></DomainRequired>
 
                 <?php
                 /*
                  * DomainName: Optional.
                  * This value specifies the user's domain. If no value is specified, the default authentication will be to use the e-tpl address as a UPN format <Username>@<Domain>. Such as JoeUser@SalesDomain.
                  */
-                if(null !== getUserEmail()) {
-                    echo '<DomainName>' . getUserHostname() . '</DomainName>';
+                if(null !== $setting->getUser()->getEmail()) {
+                    echo '<DomainName>' . $setting->getUser()->getHostname() . '</DomainName>';
                 }
                 ?>
 
@@ -195,7 +195,7 @@ echo '<?xml version = "1.0" encoding = "utf-8"?>';
                  * This value specifies whether secure login is needed.
                  * If unspecified, the default is set to on.
                  * */ ?>
-                <SSL><?= isOnOrOff('SSL' === $setting->getImapSocket('user', getUserEmail())) ?></SSL>
+                <SSL><?= isOnOrOff('SSL' === $setting->getImapSocket('user', $setting->getUser()->getEmail())) ?></SSL>
 
                 <?php
                 /*
@@ -226,12 +226,12 @@ echo '<?xml version = "1.0" encoding = "utf-8"?>';
 
             <Protocol>
                 <Type>SMTP</Type>
-                <TTL><?= $setting->getTtl('user', getUserEmail()) ?></TTL>
-                <Server><?= $setting->getSmtpHost('user', getUserEmail()) ?></Server>
-                <Port><?= $setting->getSmtpPort('user', getUserEmail()) ?></Port>
-                <DomainRequired><?= isOnOrOff($setting->getDomainRequired('user', getUserEmail())) ?></DomainRequired>
+                <TTL><?= $setting->getTtl('user', $setting->getUser()->getEmail()) ?></TTL>
+                <Server><?= $setting->getSmtpHost('user', $setting->getUser()->getEmail()) ?></Server>
+                <Port><?= $setting->getSmtpPort('user', $setting->getUser()->getEmail()) ?></Port>
+                <DomainRequired><?= isOnOrOff($setting->getDomainRequired('user', $setting->getUser()->getEmail())) ?></DomainRequired>
                 <SPA>off</SPA>
-                <SSL><?= isOnOrOff('SSL' === $setting->getSmtpSocket('user', getUserEmail())) ?></SSL>
+                <SSL><?= isOnOrOff('SSL' === $setting->getSmtpSocket('user', $setting->getUser()->getEmail())) ?></SSL>
                 <AuthRequired>on</AuthRequired>
                 <UsePOPAuth>on</UsePOPAuth>
                 <SMTPLast>off</SMTPLast>

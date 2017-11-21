@@ -1,0 +1,16 @@
+{
+  "name": "bemit-autodiscover",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "normalize-css": "^7.0.0",
+    "jQuery": "^3.2.1",
+    "font-awesome": "^4.7.0"
+  }
+}

@@ -1,0 +1,21 @@
+////
+/// Grid: Config
+/// ================
+/// All the grid default things.
+/// @group Grid
+/// @author Michael Becker
+////
+
+//
+// Breakpoint
+// ##################################################
+/// @prop {Size} $for-bp-lgx-min-size [3000px] - the minimum size for screen size lg eXtra
+$for-bp-lgx-min-size: 3000px !default;//e.g. 4k
+/// @prop {Size} $for-bp-lg-min-size [1200px] - the minimum size for screen size lg
+$for-bp-lg-min-size: 1200px !default;//e.g. desktop-pc (HD)
+/// @prop {Size} $for-bp-md-min-size [992px] - the minimum size for screen size md
+$for-bp-md-min-size: 992px !default;//e.g. laptop/desktop-pc (SD)
+/// @prop {Size} $for-bp-sm-min-size [768px] - the minimum size for screen size sm
+$for-bp-sm-min-size: 768px !default;
+/// @prop {Size} $for-bp-smx-max-size [$for-bp-sm-min-size - 1] - the maximum size for screen size smale eXtra
+$for-bp-smx-max-size: $for-bp-sm-min-size - 1 !default;

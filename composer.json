@@ -1,0 +1,21 @@
+{
+  "name": "bemit/autodiscover",
+  "description": "Enables normal small hosters to provide autodiscover functions for some mail-clients.",
+  "license": [
+    "LGPL-3.0"
+  ],
+  "authors": [
+    {
+      "name": "Michael Becker, bemit UG",
+      "email": "mb@project.bemit.eu",
+      "homepage": "https://bemit.eu",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": ">=7.0",
+    "composer/installers": "~1.0"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": false
+}

@@ -17,6 +17,6 @@
     }
   },
   "domain_required": true,
-  "login_name_require": true,
+  "login_name_required": true,
   "ttl": 168
 }

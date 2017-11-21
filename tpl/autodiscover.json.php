@@ -2,7 +2,7 @@
 ob_start();
 
 /**
- * @var \Autodiscover\Setting $setting
+ * @var \Bemit\Autodiscover\Setting $setting
  */
 $protocol = filter_input(INPUT_GET, 'Protocol', FILTER_SANITIZE_STRING);
 
@@ -27,7 +27,7 @@ switch($protocol) {
     break;
     */
     case 'AutodiscoverV1':
-        echo '"Protocol":"AutodiscoverV1","Url":"https://' . getUserHostname() . '/autodiscover/autodiscover.xml"';
+        echo '"Protocol":"AutodiscoverV1","Url":"https://' .  $setting->getUser()->getHostname() . '/autodiscover/autodiscover.xml"';
     break;
 
     default:

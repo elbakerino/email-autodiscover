@@ -1,7 +1,27 @@
+# Composer
+composer.lock
+
+# PHP Storm
+.idea
+
+# NodeJS
+node_modules
+
+# Composer
+vendor
+
+# Bower
+bower_components
+
+# Settings
 setting/*
 !setting/general.sample.json
+!setting/general.default.json
 !setting/mailbox.sample.json
-*.swp
+!setting/mailbox.default.json
+
+# Mac
 .DS_Store
-.idea
-node_modules
+
+# Misc
+*.swp
