@@ -66,6 +66,22 @@ class ShowContent {
         }
     }
 
+    public function getResponse($key) {
+        if(is_array($key)) {
+            return $this->get(array_merge(['response'], $key));
+        } else {
+            return $this->get(['response', $key]);
+        }
+    }
+
+    public function getModule($key) {
+        if(is_array($key)) {
+            return $this->get(array_merge(['module'], $key));
+        } else {
+            return $this->get(['module', $key]);
+        }
+    }
+
     public function getFooter($key) {
         if(is_array($key)) {
             return $this->get(array_merge(['footer'], $key));

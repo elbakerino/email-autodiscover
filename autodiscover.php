@@ -19,9 +19,10 @@ try {
     $setting = new Setting();
     $user = new User();
     $app = new App();
+    $app->setActiveUrl();
+
     $setting->setUser($user);
     $setting->setApp($app);
-    $app->setActiveUrl();
 } catch(Exception $e) {
     header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error');
     exit;
@@ -65,7 +66,16 @@ if(filter_has_var(INPUT_GET, 'mail_client')) {
         case 'api':
             $api = new Api($setting);
             $api->determineCall($debug);
+
+            // remove everything else from ob that is possible not json
+            ob_end_clean();
+            ob_start();
             $api->respond();
+            $output = ob_get_contents();
+            ob_end_clean();
+            ob_start();
+            echo $output;
+
             break;
     }
 }

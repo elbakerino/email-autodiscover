@@ -447,38 +447,57 @@ label {
 
 .container {
   width: 98%;
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  margin: auto;
   overflow: auto;
+  margin: 0 auto;
   background: #fff; }
   @media (min-width: 992px) {
     .container {
-      width: 960px;
-      height: 450px; } }
+      width: 960px; } }
+  @media (min-width: 992px) {
+    .container {
+      top: 50%;
+      position: absolute;
+      transform: perspective(1px) translateY(-50%);
+      right: 0;
+      left: 0; } }
 
 .header {
   padding: 10px 0; }
   .header .head-logo {
-    text-align: center; }
+    text-align: center;
+    background: url("/tpl/asset/media/logo.png") center center no-repeat;
+    background-size: contain;
+    height: 128px; }
+    .header .head-logo:before {
+      position: absolute;
+      display: block;
+      width: 128px;
+      height: 128px;
+      margin: 0 auto;
+      left: 0;
+      right: 0;
+      z-index: -1;
+      background: url("/tpl/asset/media/logo-circle.png") center center no-repeat;
+      background-size: contain; }
     .header .head-logo img {
+      display: none;
       width: 128px;
       height: auto; }
-      .header .head-logo img:before {
-        content: "";
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        z-index: -1;
-        background: url("/tpl/asset/media/logo.png");
-        background-size: cover;
-        transform: rotate(30deg); }
+    .header .head-logo.head-logo.animate {
+      background: url("/tpl/asset/media/logo-char.png") center center no-repeat;
+      background-size: contain; }
+      .header .head-logo.head-logo.animate:before {
+        animation: logo-animate-circle 4s infinite;
+        content: ' '; }
+      .header .head-logo.head-logo.animate img {
+        display: none; }
+
+@keyframes logo-animate-circle {
+  50% {
+    transform: rotate(180deg); } }
 
 .content {
-  padding: 0 20px; }
+  padding: 0 20px 15px 20px; }
   .content .intro,
   .content h1 {
     text-align: center; }
@@ -489,13 +508,14 @@ label {
     clear: both; }
   .content form .input-group .input,
   .content form .input-group .label {
-    float: left;
-    padding: 20px; }
+    padding: 10px 0; }
     @media (min-width: 768px) {
       .content form .input-group .input,
       .content form .input-group .label {
+        padding: 20px;
+        float: left;
         width: 50%; } }
-  @media (min-width: 992px) {
+  @media (min-width: 768px) {
     .content form .input-group .label {
       text-align: right; }
       .content form .input-group .label label {
@@ -503,6 +523,10 @@ label {
         padding: 12px 15px; } }
   .content form .input-group .input input {
     width: 100%; }
+  .content form .g-recaptcha-wrapper {
+    text-align: center; }
+    .content form .g-recaptcha-wrapper .g-recaptcha {
+      display: inline-block; }
   .content form .btn-wrapper {
     text-align: center; }
 
@@ -510,13 +534,48 @@ label {
   background: #88b9c7;
   padding: 10px 20px;
   text-align: center;
-  color: #fff;
-  position: absolute;
-  right: 0;
-  bottom: 1px;
-  left: 0; }
+  color: #fff; }
+  @media (min-width: 992px) {
+    .footer {
+      position: absolute;
+      right: 0;
+      left: 0;
+      bottom: 1px; } }
 
-#response-tpl {
-  display: none; }
+#response {
+  left: -100%;
+  position: absolute;
+  display: block;
+  width: 100%;
+  top: 0;
+  bottom: 0; }
+  #response .wrapper {
+    transition: background-color 0.4s ease-in;
+    background-color: transparent;
+    height: 100%;
+    overflow: auto; }
+    #response .wrapper.darken {
+      background-color: rgba(0, 0, 0, 0.3); }
+    #response .wrapper .close {
+      cursor: pointer; }
+    #response .wrapper .body {
+      padding: 20px;
+      background-color: #fff;
+      width: 800px;
+      margin: 25px auto 0 auto; }
+      #response .wrapper .body .group-label {
+        padding-bottom: 2px;
+        margin-top: 10px;
+        margin-bottom: 2px;
+        border-bottom: 1px solid #7b7b75; }
+      #response .wrapper .body .row:before, #response .wrapper .body .row:after {
+        content: ' ';
+        display: table; }
+      #response .wrapper .body .row:after {
+        clear: both; }
+      #response .wrapper .body .row :first-child,
+      #response .wrapper .body .row :last-child {
+        float: left;
+        width: 50%; }
 
 /*# sourceMappingURL=style.css.map */

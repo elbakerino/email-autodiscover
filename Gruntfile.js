@@ -121,6 +121,8 @@ module.exports = function(grunt) {
         // JS
         concat: {
             dist: {
+                // warns when something was not found but was specified
+                nonull: true,
                 src: js_concat,
                 dest: path_js_build_dir + 'js.js'
             }

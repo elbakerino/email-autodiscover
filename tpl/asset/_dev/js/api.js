@@ -1,30 +1,55 @@
-/**
- * Functions for the execution of just a sending of data to the PL api
- */
-function Api() {
-
+function Api(setting) {
+    this.setting = $.extend({
+        // defaults.
+        debug: false,
+        callbackBeforeSend: '',
+        callbackSuccess: '',
+        callbackError: ''
+    }, setting);
 }
 
-Api.prototype.send = function(event) {
-    console.log(event);
-    console.log($(event).attr('action'));
-    //console.log('href' + event.href);
-    //console.log(JSON.stringify($(event).serializeArray()));
+Api.prototype.send = function(element, event) {
+    var $this = this;
     $.ajax({
         type: 'POST',
-        url: $(event).attr('action'),
-        data: {
-            data: JSON.stringify($(event).serializeArray())
+        url: $(element).attr('action'),
+        data: $(element).serialize(),
+        beforeSend: function() {
+            if($this.setting.debug) {
+                console.log('in beforeSend');
+            }
+
+            if($this.setting.callbackBeforeSend) {
+                $this.setting.callbackBeforeSend();
+            }
         },
         success: function(data, textStatus, jqXHR) {
-            console.log('in success');
-            console.log('data: ' + data);
-            console.log('textStatus: ' + textStatus);
-            console.log('jqXHR: ' + jqXHR);
+            if($this.setting.debug) {
+                console.log('in success');
+                console.log(data);
+            }
+            data = JSON.parse(data);
+            if($this.checkResponse(data)) {
+                if($this.setting.callbackSuccess) {
+                    $this.setting.callbackSuccess(data);
+                }
+            } else {
+                if($this.setting.callbackError) {
+                    $this.setting.callbackError();
+                }
+            }
         },
         error: function(jqXHR, textStatus, errorThrown) {
-            console.log(textStatus);
-            console.log(errorThrown);
+            if($this.setting.debug) {
+                console.log('in error');
+            }
+            if($this.setting.callbackError) {
+                $this.setting.callbackError();
+            }
         }
     });
+};
+
+Api.prototype.checkResponse = function(response) {
+    return response.success;
 };

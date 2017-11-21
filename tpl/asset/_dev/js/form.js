@@ -1,14 +1,13 @@
 /**
- * Functions for the execution of just a sending of data to the PL api
+ * Just a stub for binding the needed submit handler
  */
 function Form() {
 
 }
 
 Form.prototype.bindSubmit = function(sel, event) {
-    console.log(sel);
     $(sel).on('submit', function(e) {
         e.preventDefault();
-        event(e);
+        event(this, e);
     });
 };

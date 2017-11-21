@@ -12,13 +12,18 @@ $asset_folder = '/tpl/asset/'
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
     <?php
-    if($debug){
+    if($debug) {
         ?>
         <link rel="stylesheet" type="text/css" href="https://<?= $show->setting->getApp()->getActiveHostname(false) . $asset_folder ?>style.css">
         <?php
-    }else{
+    } else {
         ?>
         <link rel="stylesheet" type="text/css" href="https://<?= $show->setting->getApp()->getActiveHostname(false) . $asset_folder ?>style.min.css">
+        <?php
+    }
+    if($show->getContent()->getModule(['google-recaptcha', 'active'])) {
+        ?>
+        <script src='https://www.google.com/recaptcha/api.js'></script>
         <?php
     }
     ?>
@@ -27,30 +32,36 @@ $asset_folder = '/tpl/asset/'
 
 <section class="container">
     <header class="header">
-        <div class="head-logo row">
-            <a class="col-24 col-sm-2 gutter-thinner" href="https://automat-sh.bemit.eu" target="_blank"><img src="https://<?= $show->setting->getApp()
-                    ->getActiveHostname(false) . $asset_folder ?>media/logo.png"/></a>
+        <div class="head-logo">
+            <img src="https://<?= $show->setting->getApp()->getActiveHostname(false) . $asset_folder ?>media/logo.png"/>
         </div>
     </header>
     <main class="content">
-        <div class="col-24">
-            <h1><?= $show->getContent()->getCenter('h1') ?></h1>
-            <p class="intro"><?= $show->getContent()->getCenter('intro') ?></p>
+        <h1><?= $show->getContent()->getCenter('h1') ?></h1>
+        <p class="intro"><?= $show->getContent()->getCenter('intro') ?></p>
 
-            <form action="https://<?= $show->setting->getApp()->getActiveHostname(false)?>/api/get/mailbox" class="trigger-submit" method="post">
-                <div class="input-group">
-                    <div class="label">
-                        <label for="form-email-inp"><?= $show->getContent()->getForm('label-input-email') ?></label>
-                    </div>
-                    <div class="input">
-                        <input type="email" name="email" value="" required id="form-email-inp"/>
-                    </div>
+        <form action="https://<?= $show->setting->getApp()
+            ->getActiveHostname(false) ?>/api/get/mailbox/information" class="trigger-submit" method="post" data-success="apply">
+            <div class="input-group">
+                <div class="label">
+                    <label for="form-email-inp"><?= $show->getContent()->getForm('label-input-email') ?></label>
                 </div>
-                <div class="btn-wrapper">
-                    <button class="" type="submit"><?= $show->getContent()->getForm('label-btn-check') ?></button>
+                <div class="input">
+                    <input type="email" name="email" value="<?= (is_string($show->setting->getUser()->getEmail()) && !empty($show->setting->getUser()
+                        ->getEmail()) ? $show->setting->getUser()->getEmail() : '') ?>" required id="form-email-inp"/>
                 </div>
-            </form>
-        </div>
+            </div>
+
+            <?php if($show->getContent()->getModule(['google-recaptcha', 'active'])) { ?>
+                <div class="g-recaptcha-wrapper">
+                    <div class="g-recaptcha" data-sitekey="6Lcs1DkUAAAAAKB2gzIMydr-Mdf4NeXh67sqU0Qe"></div>
+                </div>
+            <?php } ?>
+
+            <div class="btn-wrapper">
+                <button class="" type="submit"><?= $show->getContent()->getForm('label-btn-check') ?></button>
+            </div>
+        </form>
     </main>
 </section>
 <footer class="footer">
@@ -61,62 +72,67 @@ $asset_folder = '/tpl/asset/'
         <?= $show->getContent()->getFooter('powered-by') ?>
     </div>
 </footer>
-<div id="response-tpl">
-    <div>Response</div>
-    <div>
-        <div>URL</div>
-        <div data-dummy="info-url">URL</div>
-    </div>
-    <div>
-        <div>domain</div>
-        <div data-dummy="info-domain">domain</div>
-    </div>
+<div id="response">
+    <div class="wrapper">
+        <div class="body">
+            <div class="close">x</div>
+            <h3><?= $show->getContent()->getResponse('headline') ?></h3>
+            <div class="row">
+                <div><?= $show->getContent()->getResponse('label-url') ?></div>
+                <div data-dummy="info-url"></div>
+            </div>
+            <div class="row">
+                <div><?= $show->getContent()->getResponse('label-domain') ?></div>
+                <div data-dummy="info-domain"></div>
+            </div>
 
-    <div>server-imap</div>
-    <div>
-        <div>server-imap-host</div>
-        <div data-dummy="server-imap-host">server-imap-host</div>
-    </div>
-    <div>
-        <div>server-imap-port</div>
-        <div data-dummy="server-imap-port">server-imap-port</div>
-    </div>
-    <div>
-        <div>server-imap-socket</div>
-        <div data-dummy="server-imap-socket">server-imap-socket</div>
-    </div>
+            <div class="group-label"><?= $show->getContent()->getResponse(['imap', 'label']) ?></div>
+            <div class="row">
+                <div><?= $show->getContent()->getResponse(['imap', 'label-host']) ?></div>
+                <div data-dummy="server-imap-host"></div>
+            </div>
+            <div class="row">
+                <div><?= $show->getContent()->getResponse(['imap', 'label-port']) ?></div>
+                <div data-dummy="server-imap-port"></div>
+            </div>
+            <div class="row">
+                <div><?= $show->getContent()->getResponse(['imap', 'label-socket']) ?></div>
+                <div data-dummy="server-imap-socket"></div>
+            </div>
 
-    <div>server-smtp</div>
-    <div>
-        <div>server-smtp-host</div>
-        <div data-dummy="server-smtp-host">server-smtp-host</div>
-    </div>
-    <div>
-        <div>server-smtp-port</div>
-        <div data-dummy="server-smtp-port">server-smtp-port</div>
-    </div>
-    <div>
-        <div>server-smtp-socket</div>
-        <div data-dummy="server-smtp-socket">server-smtp-socket</div>
-    </div>
+            <div class="group-label"><?= $show->getContent()->getResponse(['smtp', 'label']) ?></div>
+            <div class="row">
+                <div><?= $show->getContent()->getResponse(['smtp', 'label-host']) ?></div>
+                <div data-dummy="server-smtp-host"></div>
+            </div>
+            <div class="row">
+                <div><?= $show->getContent()->getResponse(['smtp', 'label-port']) ?></div>
+                <div data-dummy="server-smtp-port"></div>
+            </div>
+            <div class="row">
+                <div><?= $show->getContent()->getResponse(['smtp', 'label-socket']) ?></div>
+                <div data-dummy="server-smtp-socket"></div>
+            </div>
 
-    <div>misc</div>
-    <div>
-        <div>domain-required</div>
-        <div data-dummy="domain-required">domain-required</div>
-    </div>
-    <div>
-        <div>login_name_required</div>
-        <div data-dummy="login_name_required">domain-required</div>
+            <div class="group-label"><?= $show->getContent()->getResponse('label-misc') ?></div>
+            <div class="row">
+                <div><?= $show->getContent()->getResponse('label-domain-required') ?></div>
+                <div data-dummy="domain-required"></div>
+            </div>
+            <div class="row">
+                <div><?= $show->getContent()->getResponse('label-login-name-required') ?></div>
+                <div data-dummy="login-name-required"></div>
+            </div>
+        </div>
     </div>
 </div>
 <?php
-if($debug){
+if($debug) {
     ?>
     <script src="https://<?= $show->setting->getApp()->getActiveHostname(false) . $asset_folder ?>js.js"></script>
-    <?php
+<?php
 }else{
-    ?>
+?>
     <script src="https://<?= $show->setting->getApp()->getActiveHostname(false) . $asset_folder ?>js.min.js"></script>
     <?php
 }

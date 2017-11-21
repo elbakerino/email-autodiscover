@@ -1,0 +1,25 @@
+////
+/// Grid: Mixin
+/// ================
+/// All the grid things.
+/// @group Grid
+/// @author Michael Becker
+////
+
+/// Will position elements vertical aligned middle
+/// @param {String} $position [relative] - The position the element should become, normally relative is working
+/// @output positioning with top: 50% and a transform with translateY(-50%)
+@mixin for-vertical-align($position: relative, $translateY: -50%) {
+    top:       50%;
+    position:  $position;
+    transform: perspective(1px) translateY($translateY);
+}
+
+/// Will position elements horizontal aligned center
+/// @param {String} $position [absolute] - The position the element should become, normally relative is working
+/// @output positioning with left: 50% and a transform with translateX(-50%)
+@mixin for-horizontal-align($position: absolute) {
+    left:      50%;
+    position:  $position;
+    transform: perspective(1px) translateX(-50%);
+}
