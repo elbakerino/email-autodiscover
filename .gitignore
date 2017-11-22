@@ -15,10 +15,14 @@ bower_components
 
 # Settings
 setting/*
+
 !setting/general.sample.json
 !setting/general.default.json
+
 !setting/mailbox.sample.json
 !setting/mailbox.default.json
+
+!setting/show.default.json
 
 # Mac
 .DS_Store

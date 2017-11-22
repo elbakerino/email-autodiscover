@@ -1,0 +1,48 @@
+{
+  "general": {
+    "head": {
+      "title": "Autodiscover"
+    },
+    "center": {
+      "h1": "Autodiscover",
+      "intro": "Just enter your email address and fetch the configurations you need."
+    },
+    "form": {
+      "label-input-email": "Your E-Mail Address",
+      "label-btn-check": "Get Information"
+    },
+    "footer": {
+      "copyright": "&copy; 2017 bemit UG (haftungsbeschränkt)",
+      "powered-by": "Powered by <a href=\"https://github.com/mbecker-bemit/email-autodiscover\">E-Mail Autodiscover</a>"
+    },
+    "response": {
+      "headline": "Response",
+      "label-url": "URL",
+      "label-domain": "domain",
+      "imap": {
+        "label": "IMAP",
+        "label-host": "Server",
+        "label-port": "Port",
+        "label-socket": "Socket"
+      },
+      "smtp": {
+        "label": "SMTP",
+        "label-host": "Server",
+        "label-port": "Port",
+        "label-socket": "Socket"
+      },
+      "label-misc": "Other Settings",
+      "label-domain-required": "Domain Required",
+      "label-login-name-required": "Loginname Required"
+    },
+    "module": {
+      "google-recaptcha": {
+        "active": false,
+        "key": {
+          "site": "",
+          "secret": ""
+        }
+      }
+    }
+  }
+}
