@@ -83,13 +83,17 @@ Response.prototype.triggerLogoAnimate = function() {
 };
 
 Response.prototype.open = function(context) {
-    context.animate({left: 0}, this.setting.duration);
+    $(context).css('display', 'block');
+    $('.body', context).animate({opacity: '1'}, this.setting.duration);
     setTimeout(function() {
         $('.wrapper', context).addClass('darken');
-    }, 1000);
+    }, this.setting.duration / 2);
 };
 
 Response.prototype.close = function(context) {
-    context.animate({left: '-100%'}, this.setting.duration);
+    $('.body', context).animate({opacity: '0'}, this.setting.duration);
     $('.wrapper', context).removeClass('darken');
+    setTimeout(function() {
+        $(context).css('display', 'none');
+    }, this.setting.duration);
 };

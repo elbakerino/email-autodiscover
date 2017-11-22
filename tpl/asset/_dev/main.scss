@@ -209,12 +209,13 @@ label {
 }
 
 #response {
-    left:     -100%;
+    display:  none;
     position: absolute;
-    display:  block;
     width:    100%;
     top:      0;
     bottom:   0;
+    left:     0;
+    right:    0;
     .wrapper {
         transition:       background-color $theme--transition;
         background-color: transparent;
@@ -224,9 +225,19 @@ label {
             background-color: rgba(#000, 0.3);
         }
         .close {
-            cursor: pointer;
+            width:          20px;
+            padding:        4px 0 8px 0;
+            text-align:     center;
+            position:       absolute;
+            right:          20px;
+            background:     $theme--color--secondary;
+            color:          #fff;
+            cursor:         pointer;
         }
         .body {
+            opacity:          0;
+
+            position:         relative;
             padding:          20px;
             background-color: #fff;
             width:            800px;
