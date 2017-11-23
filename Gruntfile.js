@@ -129,8 +129,16 @@ module.exports = function(grunt) {
         },
         uglify: {
             build: {
+                options: {
+                    sourceMap: true,
+                    mangle: {
+                        properties: true,
+                        toplevel: false,
+                        reserved: ['jQuery', 'jquery']
+                    }
+                },
                 src: path_js_build_dir + 'js.js',
-                dest: path_js_build_dir + 'js.min.js',
+                dest: path_js_build_dir + 'js.min.js'
             }
         },
 

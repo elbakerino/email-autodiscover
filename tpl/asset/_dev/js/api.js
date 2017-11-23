@@ -14,13 +14,13 @@ Api.prototype.send = function(element, event) {
         type: 'POST',
         url: $(element).attr('action'),
         data: $(element).serialize(),
-        beforeSend: function() {
+        beforeSend: function(jqXHR, option) {
             if($this.setting.debug) {
                 console.log('in beforeSend');
             }
 
             if($this.setting.callbackBeforeSend) {
-                $this.setting.callbackBeforeSend();
+                $this.setting.callbackBeforeSend(jqXHR, option);
             }
         },
         success: function(data, textStatus, jqXHR) {

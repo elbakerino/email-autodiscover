@@ -8,6 +8,7 @@ if(filter_has_var(INPUT_GET, 'debug')) {
 
 require_once 'function.php';
 require_once 'src/autoload.php';
+require_once 'vendor/autoload.php';
 
 use Bemit\Autodiscover\Api;
 use Bemit\Autodiscover\App;
@@ -68,13 +69,17 @@ if(filter_has_var(INPUT_GET, 'mail_client')) {
             $api->determineCall($debug);
 
             // remove everything else from ob that is possible not json
-            ob_end_clean();
-            ob_start();
+            if(!$debug) {
+                ob_end_clean();
+                ob_start();
+            }
             $api->respond();
-            $output = ob_get_contents();
-            ob_end_clean();
-            ob_start();
-            echo $output;
+            if(!$debug) {
+                $output = ob_get_contents();
+                ob_end_clean();
+                ob_start();
+                echo $output;
+            }
 
             break;
     }

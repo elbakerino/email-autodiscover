@@ -19,13 +19,13 @@ Api.prototype.send = function(element, event) {
         type: 'POST',
         url: $(element).attr('action'),
         data: $(element).serialize(),
-        beforeSend: function() {
+        beforeSend: function(jqXHR, option) {
             if($this.setting.debug) {
                 console.log('in beforeSend');
             }
 
             if($this.setting.callbackBeforeSend) {
-                $this.setting.callbackBeforeSend();
+                $this.setting.callbackBeforeSend(jqXHR, option);
             }
         },
         success: function(data, textStatus, jqXHR) {
@@ -58,25 +58,32 @@ Api.prototype.send = function(element, event) {
 Api.prototype.checkResponse = function(response) {
     return response.success;
 };
-/**
- * Combines the classes and triggers the execution
- */
-function bindApiFormHandler() {
-    var form_response = new Response({debug: false});
-
-    var form_api = new Api({
-        // defaults.
-        debug: false,
-        callbackBeforeSend: form_response.callbackBeforeSend.bind(form_response),
-        callbackSuccess: form_response.callbackSuccess.bind(form_response),
-        callbackError: form_response.callbackError.bind(form_response)
-    });
-
-    var form = new Form();
-    form.bindSubmit('.trigger-submit', form_api.send.bind(form_api));
-}
-
 $(function() {
+    /**
+     * Combines the classes and triggers the execution
+     */
+    function bindApiFormHandler() {
+        var form_response = new Response({debug: false});
+
+        var form_api = new Api({
+            // defaults.
+            debug: false,
+            callbackBeforeSend: form_response.callbackBeforeSend.bind(form_response),
+            callbackSuccess: form_response.callbackSuccess.bind(form_response),
+            callbackError: form_response.callbackError.bind(form_response)
+        });
+
+        var form = new Form();
+        form.bindSubmit('.trigger-submit', form_api.send.bind(form_api));
+
+        $('.head-logo').on('click', function() {
+            form_response.triggerLogoAnimate();
+            setTimeout(function() {
+                form_response.triggerLogoAnimate();
+            }, 6000);
+        });
+    }
+
     bindApiFormHandler();
 });
 /**
@@ -111,12 +118,26 @@ Response.prototype.bindHandler = function(context) {
     });
 };
 
-Response.prototype.callbackBeforeSend = function() {
-    this.triggerLogoAnimate();
+Response.prototype.callbackBeforeSend = function(jqXHR, option) {
+    var isCaptchaValidated = false;
+    var response = grecaptcha.getResponse();
+    if(response.length === 0) {
+        isCaptchaValidated = false;
+        alert('Please solve the Captcha.');
+        jqXHR.abort();
+    } else {
+        isCaptchaValidated = true;
+    }
+
+
+    if(isCaptchaValidated) {
+        this.triggerLogoAnimate('start');
+        //you can now submit your form
+    }
 };
 
 Response.prototype.callbackSuccess = function(data) {
-    this.triggerLogoAnimate();
+    this.triggerLogoAnimate('stop');
 
     var $this = this;
     var response_tpl = $('#response');
@@ -164,14 +185,15 @@ Response.prototype.callbackSuccess = function(data) {
 };
 
 Response.prototype.callbackError = function() {
-    this.triggerLogoAnimate();
+    this.triggerLogoAnimate('stop');
+    console.log('Api Error');
 };
 
-Response.prototype.triggerLogoAnimate = function() {
+Response.prototype.triggerLogoAnimate = function(action) {
     var head_logo = $('.head-logo');
-    if(head_logo.is('.animate')) {
+    if(head_logo.is('.animate') || 'stop' === action) {
         head_logo.removeClass('animate');
-    } else {
+    } else if(!head_logo.is('.animate') || 'start' === action) {
         head_logo.addClass('animate');
     }
 };

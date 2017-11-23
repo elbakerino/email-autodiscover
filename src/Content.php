@@ -3,7 +3,7 @@
 namespace Bemit\Autodiscover;
 
 
-class ShowContent {
+class Content {
 
     protected $setting;
 
@@ -79,6 +79,14 @@ class ShowContent {
             return $this->get(array_merge(['module'], $key));
         } else {
             return $this->get(['module', $key]);
+        }
+    }
+
+    public function getApi($key) {
+        if(is_array($key)) {
+            return $this->get(array_merge(['api'], $key));
+        } else {
+            return $this->get(['api', $key]);
         }
     }
 

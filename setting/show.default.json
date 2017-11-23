@@ -43,6 +43,20 @@
           "secret": ""
         }
       }
+    },
+    "api": {
+      "token": {
+        "SomeTokenThatIsNotSave": {
+          "active": false,
+          "group": "root",
+          "comment": "optional, just for your comment on that token"
+        }
+      },
+      "security": {
+        "domain-allowed": [
+          "*"
+        ]
+      }
     }
   }
 }

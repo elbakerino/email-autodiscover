@@ -2,7 +2,7 @@
 /**
  * @var \Bemit\Autodiscover\Show $show
  */
-$asset_folder = '/tpl/asset/'
+$asset_folder = 'tpl/asset/'
 ?>
 <!DOCTYPE html>
 <html lang="de" dir="ltr">
@@ -14,11 +14,15 @@ $asset_folder = '/tpl/asset/'
     <?php
     if($debug) {
         ?>
-        <link rel="stylesheet" type="text/css" href="https://<?= $show->setting->getApp()->getActiveHostname(false) . $asset_folder ?>style.css">
+        <link rel="stylesheet" type="text/css" href="https://<?= $show->setting->getApp()
+            ->getActiveHostname(false) . '/' . $asset_folder ?>style.css">
         <?php
     } else {
         ?>
-        <link rel="stylesheet" type="text/css" href="https://<?= $show->setting->getApp()->getActiveHostname(false) . $asset_folder ?>style.min.css">
+        <style><?php echo str_replace(
+                ['  ', ' {', ': '],
+                ['', '{', ':',],
+                preg_replace("/\r|\n/", '', file_get_contents($asset_folder . 'style.min.css'))); ?></style>
         <?php
     }
     if($show->getContent()->getModule(['google-recaptcha', 'active'])) {
@@ -33,7 +37,7 @@ $asset_folder = '/tpl/asset/'
 <section class="container">
     <header class="header">
         <div class="head-logo">
-            <img src="https://<?= $show->setting->getApp()->getActiveHostname(false) . $asset_folder ?>media/logo.png"/>
+            <img src="https://<?= $show->setting->getApp()->getActiveHostname(false) . '/' .$asset_folder ?>media/logo.png"/>
         </div>
     </header>
     <main class="content">
@@ -54,7 +58,10 @@ $asset_folder = '/tpl/asset/'
 
             <?php if($show->getContent()->getModule(['google-recaptcha', 'active'])) { ?>
                 <div class="g-recaptcha-wrapper">
-                    <div class="g-recaptcha" data-sitekey="6Lcs1DkUAAAAAKB2gzIMydr-Mdf4NeXh67sqU0Qe"></div>
+                    <div
+                            class="g-recaptcha"
+                            data-sitekey="<?= $show->getContent()->getModule(['google-recaptcha', 'key', 'site']) ?>"
+                    ></div>
                 </div>
             <?php } ?>
 
@@ -129,11 +136,11 @@ $asset_folder = '/tpl/asset/'
 <?php
 if($debug) {
     ?>
-    <script src="https://<?= $show->setting->getApp()->getActiveHostname(false) . $asset_folder ?>js.js"></script>
+    <script src="https://<?= $show->setting->getApp()->getActiveHostname(false) . '/' .$asset_folder ?>js.js"></script>
 <?php
 }else{
 ?>
-    <script src="https://<?= $show->setting->getApp()->getActiveHostname(false) . $asset_folder ?>js.min.js"></script>
+    <script src="https://<?= $show->setting->getApp()->getActiveHostname(false) . '/' .$asset_folder ?>js.min.js"></script>
     <?php
 }
 ?>

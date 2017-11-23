@@ -6,9 +6,9 @@ namespace Bemit\Autodiscover;
 class Show {
 
     /**
-     * @var \Bemit\Autodiscover\ShowContent
+     * @var \Bemit\Autodiscover\Content
      */
-    protected $show_content;
+    protected $content;
 
     /**
      * @var \Bemit\Autodiscover\Setting
@@ -22,7 +22,7 @@ class Show {
      */
     public function __construct(&$setting) {
         $this->setting = $setting;
-        $this->show_content = new ShowContent($this->setting);
+        $this->content = new Content($this->setting);
     }
 
     public function render($debug) {
@@ -33,9 +33,9 @@ class Show {
     }
 
     /**
-     * @return \Bemit\Autodiscover\ShowContent
+     * @return \Bemit\Autodiscover\Content
      */
     public function getContent() {
-        return $this->show_content;
+        return $this->content;
     }
 }
